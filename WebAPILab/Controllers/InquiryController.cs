@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Swashbuckle.Swagger.Annotations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Description;
 using WebAPILab.DAL;
 using WebAPILab.Models;
 
@@ -11,6 +13,10 @@ namespace WebAPILab.Controllers
 {
     public class InquiryController : ApiController
     {
+        public string Get()
+        {
+            return "Hello Swagger!";
+        }
         #region MVC
         public Customer GetCustomer(int customerId)
         {
@@ -39,6 +45,8 @@ namespace WebAPILab.Controllers
             return this.GetCustomerResponse(-1, email);
         }
 
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(Customer))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(Customer))]
         public HttpResponseMessage GetCustomerResponse(int customerId, string email)
         {
             HttpResponseMessage response = null;
