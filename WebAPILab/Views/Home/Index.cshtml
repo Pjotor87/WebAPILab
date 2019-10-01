@@ -1,6 +1,6 @@
 ﻿@model WebAPILab.Models.HomeViewModel
 
-<div class="dbresultstable-container-customers">
+<div class="dbresultstable container-customers">
     <table>
         <thead>
             <tr>
@@ -22,6 +22,32 @@
                     <td>@item.TransactionIds</td>
                 </tr>
             }
-            </tbody>
+        </tbody>
+    </table>
+</div>
+
+<div class="dbresultstable container-transactions">
+    <table>
+        <thead>
+            <tr>
+                <td>TransactionId</td>
+                <td>TransactionDateTime</td>
+                <td>Amount</td>
+                <td>CurrencyCode</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Transactions)
+            {
+                <tr>
+                    <td>@item.TransactionId</td>
+                    <td>@item.TransactionDateTime</td>
+                    <td>@item.Amount</td>
+                    <td>@item.CurrencyCode</td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
