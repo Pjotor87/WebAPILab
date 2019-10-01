@@ -75,6 +75,23 @@ namespace WebAPILab.Tests.Controllers
             AssertTestCustomer(result);
         }
 
+        [TestMethod]
+        public async Task CanGetCustomerTransactions()
+        {
+            Assert.Fail();
+
+            // Arrange
+            AddTestdataToDatabase();
+            InquiryController controller = new InquiryController();
+
+            // Act
+            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer.CustomerId, testCustomer.CustomerEmail);
+            Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
+
+            // Assert
+            AssertTestCustomer(result);
+        }
+
         private void AssertTestCustomer(Customer result)
         {
             Assert.IsNotNull(result);

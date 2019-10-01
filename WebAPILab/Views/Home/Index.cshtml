@@ -98,13 +98,49 @@
 </div>
 
 <div class="container-queryCustomers">
-    @using (Ajax.BeginForm("GetCustomer", "Home", null, new AjaxOptions { HttpMethod = "POST" }))
+    @using (Ajax.BeginForm("GetCustomerAsync", "Home", null, new AjaxOptions { HttpMethod = "GET" }))
     {
         @Html.AntiForgeryToken()
         @Html.Label("Customer ID: ")
         <input name="customerId" type="text" value="12456" />
         @Html.Label("Email: ")
         <input name="email" type="text" value="user3@domain.com" />
-        <input type="submit" value="Query database!" />
+        <input type="submit" value="Query database" />
+    }
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            Customer ID: <input type="text" class="clientCustomerId" value="12456" />
+            Email: <input name="email" type="text" class="clientEmail" value="user3@domain.com" />
+            <input type="button" class="queryOnClient" value="Query on client" />
+            <div class="clientCallResult"></div>
+        </div>
     }
 </div>
+
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+        $(".queryOnClient").click(function () {
+            $('.clientCallResult').text("Querying...")
+            var customerId = $(".clientCustomerId").val();
+            var email = $(".clientEmail").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCustomerAsync")' + "?customerId=" + customerId + "&email=" + email,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('.clientCallResult').text(data)
+                },
+                error: function (data) {
+                    $('.clientCallResult').text(data)
+                }
+            });
+        });
+    });
+
+</script>
