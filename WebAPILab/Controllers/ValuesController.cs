@@ -1,39 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
+using WebAPILab.Models;
 
 namespace WebAPILab.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        public Customer GetCustomer(int customerId)
         {
-            return new string[] { "value1", "value2" };
+            return new Customer();
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        public Customer GetCustomer(string email)
         {
-            return "value";
+            return new Customer();
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        public Customer GetCustomer(int customerId, string email)
         {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            return new Customer();
         }
     }
 }
