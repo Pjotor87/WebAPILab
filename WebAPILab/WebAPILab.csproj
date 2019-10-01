@@ -149,9 +149,9 @@
     </Compile>
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
-    <Compile Include="Migrations\201910011630150_Initial.cs" />
-    <Compile Include="Migrations\201910011630150_Initial.Designer.cs">
-      <DependentUpon>201910011630150_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201910012233441_Initial.cs" />
+    <Compile Include="Migrations\201910012233441_Initial.Designer.cs">
+      <DependentUpon>201910012233441_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -221,8 +221,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910011630150_Initial.resx">
-      <DependentUpon>201910011630150_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910012233441_Initial.resx">
+      <DependentUpon>201910012233441_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
