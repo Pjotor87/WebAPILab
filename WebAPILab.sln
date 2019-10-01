@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPILab", "WebAPILab\WebAPILab.csproj", "{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPILab.Tests", "WebAPILab.Tests\WebAPILab.Tests.csproj", "{D252B14B-4179-4C2A-A9E4-CAC442DA48D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D252B14B-4179-4C2A-A9E4-CAC442DA48D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D252B14B-4179-4C2A-A9E4-CAC442DA48D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D252B14B-4179-4C2A-A9E4-CAC442DA48D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D252B14B-4179-4C2A-A9E4-CAC442DA48D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57017927-DEF0-443E-B7A2-64D2898E554C}
+	EndGlobalSection
+EndGlobal
