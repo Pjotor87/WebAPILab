@@ -78,8 +78,6 @@ namespace WebAPILab.Tests.Controllers
         [TestMethod]
         public async Task CanGetCustomerTransactions()
         {
-            Assert.Fail();
-
             // Arrange
             AddTestdataToDatabase();
             InquiryController controller = new InquiryController();
@@ -90,6 +88,7 @@ namespace WebAPILab.Tests.Controllers
 
             // Assert
             AssertTestCustomer(result);
+            Assert.AreEqual(2, result.Transactions.Count);
         }
 
         private void AssertTestCustomer(Customer result)
