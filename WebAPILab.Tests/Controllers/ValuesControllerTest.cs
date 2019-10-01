@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebAPILab;
 using WebAPILab.Controllers;
+using WebAPILab.Models;
 
 namespace WebAPILab.Tests.Controllers
 {
@@ -14,68 +15,62 @@ namespace WebAPILab.Tests.Controllers
     public class ValuesControllerTest
     {
         [TestMethod]
-        public void Get()
+        public void CanGetCustomerById()
         {
             // Arrange
             ValuesController controller = new ValuesController();
+            int customerId = 123456;
 
             // Act
-            IEnumerable<string> result = controller.Get();
+            Customer result = controller.GetCustomer(customerId);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
+            Assert.AreEqual(customerId, result.CustomerId);
+            Assert.AreEqual("Firstname Lastname", result.CustomerId);
+            Assert.AreEqual("user @domain.com", result.CustomerId);
+            Assert.AreEqual("0123456789", result.CustomerId);
+            Assert.AreEqual(new Transaction(), result.RecentTransactions);
         }
 
         [TestMethod]
-        public void GetById()
+        public void CanGetCustomerByEmail()
         {
             // Arrange
             ValuesController controller = new ValuesController();
+            string email = "user@domain.com";
 
             // Act
-            string result = controller.Get(5);
+            Customer result = controller.GetCustomer(email);
 
             // Assert
-            Assert.AreEqual("value", result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(123456, result.CustomerId);
+            Assert.AreEqual(email, result.CustomerId);
+            Assert.AreEqual("user @domain.com", result.CustomerId);
+            Assert.AreEqual("0123456789", result.CustomerId);
+            Assert.AreEqual(new Transaction(), result.RecentTransactions);
         }
 
         [TestMethod]
-        public void Post()
+        public void CanGetCustomerByIdAndEmail()
         {
             // Arrange
             ValuesController controller = new ValuesController();
+            int customerId = 123456;
+            string email = "user@domain.com";
 
             // Act
-            controller.Post("value");
+            Customer result = controller.GetCustomer(customerId, email);
 
             // Assert
-        }
-
-        [TestMethod]
-        public void Put()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
-
-            // Act
-            controller.Put(5, "value");
-
-            // Assert
-        }
-
-        [TestMethod]
-        public void Delete()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
-
-            // Act
-            controller.Delete(5);
-
-            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(customerId, result.CustomerId);
+            Assert.AreEqual(email, result.CustomerId);
+            Assert.AreEqual("user @domain.com", result.CustomerId);
+            Assert.AreEqual("0123456789", result.CustomerId);
+            Assert.AreEqual(new Transaction(), result.RecentTransactions);
         }
     }
 }
