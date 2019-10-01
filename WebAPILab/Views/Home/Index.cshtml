@@ -51,3 +51,26 @@
         </tbody>
     </table>
 </div>
+
+<div class="dbresultstable container-latestTransactions">
+    @foreach (var customer in Model.Customers)
+    {
+    <table>
+        <thead>
+            <tr>
+                <td>Customer</td>
+                <td>TransactionDateTime</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in customer.GetMostRecentTransactions(5))
+            {
+                <tr>
+                    <td>@customer.CustomerName</td>
+                    <td>@transaction.TransactionDateTime</td>
+                </tr>
+            }
+            </tbody>
+    </table>
+    }
+</div>

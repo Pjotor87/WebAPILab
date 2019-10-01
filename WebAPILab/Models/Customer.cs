@@ -27,5 +27,10 @@ namespace WebAPILab.Models
                 transactions.Where(x => transactionIds.Contains(x.TransactionId)).ToList() : 
                 new List<Transaction>();
         }
+
+        public IList<Transaction> GetMostRecentTransactions(int take)
+        {
+            return this.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(take).ToList();
+        }
     }
 }
