@@ -6,6 +6,7 @@ namespace WebAPILab.Models
 {
     public class Transaction
     {
+        public int Id { get; set; }
         public int TransactionId { get; set; }
         [DisplayFormat(DataFormatString = "{DD/mm/YY HH:MM}")]
         public DateTime TransactionDateTime { get; set; }

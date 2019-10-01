@@ -15,6 +15,9 @@ namespace WebAPILab.Models
         {
             this.Customers = databaseContext.Customers.ToList();
             this.Transactions = databaseContext.Transactions.ToList();
+
+            foreach (var customer in this.Customers)
+                customer.PopulateTransactions(this.Transactions);
         }
     }
 }

@@ -12,11 +12,7 @@ namespace WebAPILab.Controllers
     {
         public ActionResult Index()
         {
-            return View(
-                new HomeViewModel(
-                    new DatabaseContext()
-                )
-             );
+            return View(new HomeViewModel(new DatabaseContext()));
         }
     }
 }

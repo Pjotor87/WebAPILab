@@ -17,24 +17,25 @@ namespace WebAPILab.DAL
             var customers = new List<Customer>
             {
                 new Customer{
-                    Id = 1,
                     CustomerId = 123456,
                     CustomerName = "Firstname Lastname",
                     CustomerEmail = "user@domain.com",
                     MobileNo = 0123456789,
-                    RecentTransactions = new List<Transaction> {
-                        new Transaction()
-                    }
+                    TransactionIds = "1295"
                 },
                 new Customer{
-                    Id = 1,
+                    CustomerId = 123456,
+                    CustomerName = "James Hetfield",
+                    CustomerEmail = "user3@domain.com",
+                    MobileNo = 1029384756,
+                    TransactionIds = "550,500"
+                },
+                new Customer{
                     CustomerId = 198475,
                     CustomerName = "Peter Andersson",
                     CustomerEmail = "user2@domain.com",
                     MobileNo = 9876543210,
-                    RecentTransactions = new List<Transaction> {
-                        new Transaction()
-                    }
+                    TransactionIds = string.Empty
                 }
             };
 
@@ -45,11 +46,27 @@ namespace WebAPILab.DAL
             {
                 new Transaction()
                 {
-                    TransactionId = 1,
+                    TransactionId = 1295,
                     Amount = 199.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now,
                     Status = Constants.TransactionStatus.Success
+                },
+                new Transaction()
+                {
+                    TransactionId = 500,
+                    Amount = 699.90,
+                    CurrencyCode = "SEK",
+                    TransactionDateTime = DateTime.Now.AddDays(-30),
+                    Status = Constants.TransactionStatus.Failed
+                },
+                new Transaction()
+                {
+                    TransactionId = 550,
+                    Amount = 699.90,
+                    CurrencyCode = "SEK",
+                    TransactionDateTime = DateTime.Now.AddDays(-30),
+                    Status = Constants.TransactionStatus.Failed
                 }
             };
 
