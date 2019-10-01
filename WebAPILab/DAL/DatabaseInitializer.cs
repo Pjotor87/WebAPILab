@@ -48,7 +48,7 @@ namespace WebAPILab.DAL
                 {
                     TransactionId = 1295,
                     Amount = 199.90,
-                    CurrencyCode = "SEK",
+                    CurrencyCode = "AAA",
                     TransactionDateTime = DateTime.Now,
                     Status = Constants.TransactionStatus.Success
                 },
@@ -56,7 +56,7 @@ namespace WebAPILab.DAL
                 {
                     TransactionId = 500,
                     Amount = 699.90,
-                    CurrencyCode = "SEK",
+                    CurrencyCode = "BBB",
                     TransactionDateTime = DateTime.Now.AddDays(-30),
                     Status = Constants.TransactionStatus.Failed
                 },

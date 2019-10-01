@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Text;
 
@@ -6,6 +7,11 @@ namespace WebAPILab.Helpers
 {
     public static class CurrencyHelper
     {
+        public static IList<string> GetCurrencyCodes(Encoding encoding = null)
+        {
+            return GetCurrencyCodes(ConfigurationManager.AppSettings["CurrenciesFilePath"]);
+        }
+
         public static IList<string> GetCurrencyCodes(string currencyCodesFilePath, Encoding encoding = null)
         {
             if (!File.Exists(currencyCodesFilePath))

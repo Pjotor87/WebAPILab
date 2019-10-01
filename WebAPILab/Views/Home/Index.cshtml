@@ -74,3 +74,25 @@
     </table>
     }
 </div>
+
+<div class="dbresultstable container-validCurrencies">
+    <table>
+        <thead>
+            <tr>
+                <td>TransactionId</td>
+                <td>Currency</td>
+                <td>Is Valid?</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.CurrencyCode</td>
+                    <td>@transaction.IsValidCurrency(transaction.CurrencyCode)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

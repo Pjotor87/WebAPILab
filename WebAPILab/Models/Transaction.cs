@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using WebAPILab.Constants;
+using WebAPILab.Helpers;
 
 namespace WebAPILab.Models
 {
@@ -15,5 +16,10 @@ namespace WebAPILab.Models
         [MinLength(3), MaxLength(3)]
         public string CurrencyCode { get; set; }
         public TransactionStatus Status { get; set; }
+
+        public bool IsValidCurrency(string currency)
+        {
+            return CurrencyHelper.GetCurrencyCodes().Contains(currency);
+        }
     }
 }
