@@ -145,6 +145,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CurrencyHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Migrations\201910011630150_Initial.cs" />
     <Compile Include="Migrations\201910011630150_Initial.Designer.cs">
       <DependentUpon>201910011630150_Initial.cs</DependentUpon>
