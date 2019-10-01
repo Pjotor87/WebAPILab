@@ -165,9 +165,8 @@
     <Compile Include="Constants\Status.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DAL\TransactionContext.cs" />
-    <Compile Include="DAL\CustomerContext.cs" />
-    <Compile Include="DAL\CustomerInitializer.cs" />
+    <Compile Include="DAL\DatabaseContext.cs" />
+    <Compile Include="DAL\DatabaseInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

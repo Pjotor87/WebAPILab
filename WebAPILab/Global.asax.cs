@@ -14,7 +14,7 @@ namespace WebAPILab
     {
         protected void Application_Start()
         {
-            new CustomerInitializer(new CustomerContext());
+            new DatabaseInitializer(new DatabaseContext());
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -5,14 +5,14 @@ using WebAPILab.Models;
 
 namespace WebAPILab.DAL
 {
-    public class CustomerInitializer : DropCreateDatabaseAlways<CustomerContext>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {
-        public CustomerInitializer(CustomerContext customerContext)
+        public DatabaseInitializer(DatabaseContext databaseContext)
         {
-            this.InitializeDatabase(customerContext);
+            this.InitializeDatabase(databaseContext);
         }
 
-        protected override void Seed(CustomerContext context)
+        protected override void Seed(DatabaseContext context)
         {
             var customers = new List<Customer>
             {
@@ -34,18 +34,26 @@ namespace WebAPILab.DAL
                     MobileNo = 9876543210,
                     RecentTransactions = new List<Transaction> {
                         new Transaction()
-                        {
-                            TransactionId = 1,
-                            Amount = 199.90,
-                            CurrencyCode = "SEK",
-                            TransactionDateTime = DateTime.Now,
-                            Status = Constants.TransactionStatus.Success
-                        }
                     }
                 }
             };
 
             customers.ForEach(x => context.Customers.Add(x));
+            context.SaveChanges();
+
+            var transactions = new List<Transaction>
+            {
+                new Transaction()
+                {
+                    TransactionId = 1,
+                    Amount = 199.90,
+                    CurrencyCode = "SEK",
+                    TransactionDateTime = DateTime.Now,
+                    Status = Constants.TransactionStatus.Success
+                }
+            };
+
+            transactions.ForEach(x => context.Transactions.Add(x));
             context.SaveChanges();
         }
     }

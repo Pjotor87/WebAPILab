@@ -11,10 +11,10 @@ namespace WebAPILab.Models
         public IList<Customer> Customers { get; set; }
         public IList<Transaction> Transactions { get; set; }
 
-        public HomeViewModel()
+        public HomeViewModel(DatabaseContext databaseContext)
         {
-            CustomerContext customerContext = new CustomerContext();
-            this.Customers = customerContext.Customers.ToList();
+            this.Customers = databaseContext.Customers.ToList();
+            this.Transactions = databaseContext.Transactions.ToList();
         }
     }
 }

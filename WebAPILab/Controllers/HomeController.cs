@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAPILab.DAL;
 using WebAPILab.Models;
 
 namespace WebAPILab.Controllers
@@ -11,7 +12,11 @@ namespace WebAPILab.Controllers
     {
         public ActionResult Index()
         {
-            return View(new HomeViewModel());
+            return View(
+                new HomeViewModel(
+                    new DatabaseContext()
+                )
+             );
         }
     }
 }
