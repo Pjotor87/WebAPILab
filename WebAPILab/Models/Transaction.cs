@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using WebAPILab.Constants;
+using WebAPILab.Constants.Enum;
 using WebAPILab.Helpers;
 
 namespace WebAPILab.Models

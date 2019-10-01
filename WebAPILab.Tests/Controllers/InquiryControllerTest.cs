@@ -15,10 +15,22 @@ namespace WebAPILab.Tests.Controllers
     [TestClass]
     public class InquiryControllerTest
     {
+        static HttpClient client = new HttpClient();
+        static DateTime testDate = DateTime.Now;
+        static Customer testCustomer = new Customer() { CustomerId = 9999, CustomerEmail = "tests@test.com", CustomerName = "Mr Customer", MobileNo = 1111122222, TransactionIds = "999,888" };
+        static Transaction testTransaction1 = new Transaction() { CurrencyCode = "SEK", TransactionDateTime = testDate, Amount = 999.50, Status = Constants.Enum.TransactionStatus.Success, TransactionId = 999 };
+        static Transaction testTransaction2 = new Transaction() { CurrencyCode = "GBP", TransactionDateTime = testDate, Amount = 48.20, Status = Constants.Enum.TransactionStatus.Success, TransactionId = 888 };
+
         [TestInitialize]
-        public void MyTestMethod()
+        public void InitializeTests()
         {
-            new DatabaseInitializer(new DatabaseContext());
+            DatabaseContext context = new DatabaseContext();
+            new DatabaseInitializer(context);
+            context.Customers.Add(testCustomer);
+            context.SaveChanges();
+            context.Transactions.Add(testTransaction1);
+            context.Transactions.Add(testTransaction2);
+            context.SaveChanges();
         }
 
         [TestMethod]
@@ -26,6 +38,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             InquiryController controller = new InquiryController();
+            //controller.GetCustomerResponse();
             int customerId = 123456;
 
             // Act
@@ -77,6 +90,17 @@ namespace WebAPILab.Tests.Controllers
             Assert.AreEqual("user @domain.com", result.CustomerId);
             Assert.AreEqual("0123456789", result.CustomerId);
             Assert.AreEqual(new Transaction(), result.RecentTransactions);
+        }
+
+        [TestCleanup]
+        public void TearDown()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Customers.Remove(testCustomer);
+            context.SaveChanges();
+            context.Transactions.Remove(testTransaction1);
+            context.Transactions.Remove(testTransaction2);
+            context.SaveChanges();
         }
     }
 }
