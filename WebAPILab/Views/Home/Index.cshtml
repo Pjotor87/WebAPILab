@@ -96,3 +96,15 @@
         </tbody>
     </table>
 </div>
+
+<div class="container-queryCustomers">
+    @using (Ajax.BeginForm("GetCustomer", "Home", null, new AjaxOptions { HttpMethod = "POST" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Label("Customer ID: ")
+        <input name="customerId" type="text" value="12456" />
+        @Html.Label("Email: ")
+        <input name="email" type="text" value="user3@domain.com" />
+        <input type="submit" value="Query database!" />
+    }
+</div>

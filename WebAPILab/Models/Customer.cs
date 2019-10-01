@@ -7,6 +7,7 @@ namespace WebAPILab.Models
 {
     public class Customer
     {
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         [MaxLength(30)]
         public string CustomerName { get; set; }

@@ -10,7 +10,6 @@ namespace WebAPILab.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebAPILab.DAL.DatabaseContext";
         }
 
         protected override void Seed(WebAPILab.DAL.DatabaseContext context)

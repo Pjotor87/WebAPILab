@@ -24,7 +24,7 @@ namespace WebAPILab.DAL
                     TransactionIds = "1295"
                 },
                 new Customer{
-                    CustomerId = 123456,
+                    CustomerId = 12456,
                     CustomerName = "James Hetfield",
                     CustomerEmail = "user3@domain.com",
                     MobileNo = 1029384756,
