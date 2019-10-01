@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebAPILab;
 using WebAPILab.Controllers;
+using WebAPILab.DAL;
 using WebAPILab.Models;
 
 namespace WebAPILab.Tests.Controllers
@@ -14,6 +15,12 @@ namespace WebAPILab.Tests.Controllers
     [TestClass]
     public class InquiryControllerTest
     {
+        [TestInitialize]
+        public void MyTestMethod()
+        {
+            new DatabaseInitializer(new DatabaseContext());
+        }
+
         [TestMethod]
         public void CanGetCustomerById()
         {
@@ -30,7 +37,6 @@ namespace WebAPILab.Tests.Controllers
             Assert.AreEqual("Firstname Lastname", result.CustomerId);
             Assert.AreEqual("user @domain.com", result.CustomerId);
             Assert.AreEqual("0123456789", result.CustomerId);
-            Assert.AreEqual(new Transaction(), result.RecentTransactions);
         }
 
         [TestMethod]

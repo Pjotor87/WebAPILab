@@ -133,7 +133,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Constants\Status.cs" />
+    <Compile Include="Constants\Enum\Status.cs" />
+    <Compile Include="DAL\Seed\CustomerSeed.cs" />
+    <Compile Include="DAL\Seed\ISeed.cs" />
+    <Compile Include="DAL\Seed\TransactionSeed.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiryController.cs" />
     <Compile Include="DAL\DatabaseContext.cs" />
