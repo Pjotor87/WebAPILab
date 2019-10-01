@@ -12,13 +12,13 @@ using WebAPILab.Models;
 namespace WebAPILab.Tests.Controllers
 {
     [TestClass]
-    public class ValuesControllerTest
+    public class InquiryControllerTest
     {
         [TestMethod]
         public void CanGetCustomerById()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            InquiryController controller = new InquiryController();
             int customerId = 123456;
 
             // Act
