@@ -23,12 +23,12 @@ namespace WebAPILab.Controllers
             if (customerId > 0)
             {
                 if (!string.IsNullOrEmpty(email))
-                    customer = new ValuesController().GetCustomer(customerId, email);
+                    customer = new InquiryController().GetCustomer(customerId, email);
                 else
-                    customer = new ValuesController().GetCustomer(customerId);
+                    customer = new InquiryController().GetCustomer(customerId);
             }
             else if (!string.IsNullOrEmpty(email))
-                customer = new ValuesController().GetCustomer(email);
+                customer = new InquiryController().GetCustomer(email);
             else
                 return Json(new { Error = "Bad arguments" });    
 
