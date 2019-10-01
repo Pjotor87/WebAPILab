@@ -8,11 +8,14 @@ namespace WebAPILab.Models
     public class Customer
     {
         public int Id { get; set; }
+        [Range(1, 9999999999)]
         public int CustomerId { get; set; }
         [MaxLength(30)]
         public string CustomerName { get; set; }
         [MaxLength(25)]
+        [EmailAddress]
         public string CustomerEmail { get; set; }
+        [Range(1, 9999999999)]
         public double MobileNo { get; set; }
         public string TransactionIds { get; set; }
         public IList<Transaction> Transactions { get; set; }
