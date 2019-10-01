@@ -43,13 +43,17 @@ namespace WebAPILab.Controllers
         {
             HttpResponseMessage response = null;
 
+            DatabaseContext databaseContext = new DatabaseContext();
+
             if (customerId <= 0 && string.IsNullOrEmpty(email))
             {
                 response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("No inquiry criteria") };
             }
             else if (customerId <= 0)
             {
-                Customer searchResult = new DatabaseContext().Customers.Where(x => x.CustomerEmail == email).FirstOrDefault();
+                Customer searchResult = databaseContext.Customers.Where(x => x.CustomerEmail == email).FirstOrDefault();
+                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Email") };
                 else
@@ -57,7 +61,9 @@ namespace WebAPILab.Controllers
             }
             else if (string.IsNullOrEmpty(email))
             {
-                Customer searchResult = new DatabaseContext().Customers.Where(x => x.CustomerId == customerId).FirstOrDefault();
+                Customer searchResult = databaseContext.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault();
+                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Customer ID") };
                 else
@@ -65,7 +71,9 @@ namespace WebAPILab.Controllers
             }
             else
             {
-                Customer searchResult = new DatabaseContext().Customers.ToList().Where(x => x.CustomerId == customerId && x.CustomerEmail == email).FirstOrDefault();
+                Customer searchResult = databaseContext.Customers.ToList().Where(x => x.CustomerId == customerId && x.CustomerEmail == email).FirstOrDefault();
+                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
                 else

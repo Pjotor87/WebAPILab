@@ -33,5 +33,10 @@ namespace WebAPILab.Models
         {
             return this.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(take).ToList();
         }
+
+        public void SetMostRecentTransactions(int take)
+        {
+            this.Transactions = this.GetMostRecentTransactions(take);
+        }
     }
 }
