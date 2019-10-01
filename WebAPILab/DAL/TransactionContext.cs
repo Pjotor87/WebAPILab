@@ -5,7 +5,7 @@ namespace WebAPILab.DAL
 {
     public class TransactionContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public TransactionContext() : base("TransactionContext")
         {
