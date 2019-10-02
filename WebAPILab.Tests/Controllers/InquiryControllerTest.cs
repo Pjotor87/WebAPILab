@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -89,6 +90,54 @@ namespace WebAPILab.Tests.Controllers
             // Assert
             AssertTestCustomer(result);
             Assert.AreEqual(2, result.Transactions.Count);
+        }
+
+        [TestMethod]
+        public async Task NoMatchReturnsNotFoundAsync()
+        {
+            // Arrange
+            AddTestdataToDatabase();
+            InquiryController controller = new InquiryController();
+
+            // Act
+            HttpResponseMessage response = controller.GetCustomerResponse(500505, "anemail@thatnoone.has");
+            string responseContent = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual("not found", responseContent.ToLower());
+        }
+
+        [TestMethod]
+        public async Task BadRequestIsReturnedWhenIdIsNotMatchAsync()
+        {
+            // Arrange
+            AddTestdataToDatabase();
+            InquiryController controller = new InquiryController();
+
+            // Act
+            HttpResponseMessage response = controller.GetCustomerResponseById(500505);
+            string responseContent = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual("invalid customer id", responseContent.ToLower());
+        }
+
+        [TestMethod]
+        public async Task BadRequestIsReturnedWhenEmailIsNotMatchAsync()
+        {
+            // Arrange
+            AddTestdataToDatabase();
+            InquiryController controller = new InquiryController();
+
+            // Act
+            HttpResponseMessage response = controller.GetCustomerResponseByEmail("anemail@thatnoone.has");
+            string responseContent = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual("invalid email", responseContent.ToLower());
         }
 
         private void AssertTestCustomer(Customer result)

@@ -52,32 +52,38 @@ namespace WebAPILab.Controllers
             else if (customerId <= 0)
             {
                 Customer searchResult = databaseContext.Customers.Where(x => x.CustomerEmail == email).FirstOrDefault();
-                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Email") };
                 else
+                {
+                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                    searchResult.SetMostRecentTransactions(5);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
+                }
             }
             else if (string.IsNullOrEmpty(email))
             {
                 Customer searchResult = databaseContext.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault();
-                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Customer ID") };
                 else
+                {
+                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                    searchResult.SetMostRecentTransactions(5);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
+                }
             }
             else
             {
                 Customer searchResult = databaseContext.Customers.ToList().Where(x => x.CustomerId == customerId && x.CustomerEmail == email).FirstOrDefault();
-                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                searchResult.SetMostRecentTransactions(5);
                 if (searchResult == null)
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
                 else
+                {
+                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                    searchResult.SetMostRecentTransactions(5);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
+                }
             }
 
             return response;
