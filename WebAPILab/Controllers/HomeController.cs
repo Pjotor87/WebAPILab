@@ -19,6 +19,7 @@ namespace WebAPILab.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult RedirectToSwagger()
         {
             return Redirect("/swagger/ui/index");

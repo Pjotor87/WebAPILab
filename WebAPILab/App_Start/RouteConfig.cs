@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace WebAPILab
@@ -8,19 +9,28 @@ namespace WebAPILab
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-#if DEBUG
+            MapRoutesDebug(routes);
+            MapRoutesRelease(routes);
+        }
+
+        [Conditional("DEBUG")]
+        private static void MapRoutesDebug(RouteCollection routes)
+        {
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "RedirectToSwagger", id = UrlParameter.Optional }
             );
-#else
+        }
+
+        [Conditional("RELEASE")]
+        private static void MapRoutesRelease(RouteCollection routes)
+        {
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-#endif
         }
     }
 }
