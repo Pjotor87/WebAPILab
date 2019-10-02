@@ -18,5 +18,10 @@ namespace WebAPILab.Controllers
             string response = await new InquiryController().GetCustomerResponse(customerId, email).Content.ReadAsStringAsync();
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult RedirectToSwagger()
+        {
+            return Redirect("/swagger/ui/index");
+        }
     }
 }

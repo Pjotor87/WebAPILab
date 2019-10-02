@@ -38,7 +38,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer.CustomerId);
+            HttpResponseMessage response = controller.GetCustomerResponseById(testCustomer.CustomerId);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
@@ -53,7 +53,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer.CustomerEmail);
+            HttpResponseMessage response = controller.GetCustomerResponseByEmail(testCustomer.CustomerEmail);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
