@@ -56,8 +56,7 @@ namespace WebAPILab.Controllers
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Email") };
                 else
                 {
-                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                    searchResult.SetMostRecentTransactions(5);
+                    PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
                 }
             }
@@ -68,8 +67,7 @@ namespace WebAPILab.Controllers
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Customer ID") };
                 else
                 {
-                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                    searchResult.SetMostRecentTransactions(5);
+                    PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
                 }
             }
@@ -80,13 +78,18 @@ namespace WebAPILab.Controllers
                     response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
                 else
                 {
-                    searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-                    searchResult.SetMostRecentTransactions(5);
+                    PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
                     response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
                 }
             }
 
             return response;
+        }
+
+        private static void PopulateSearchResultWithLatestTransactions(DatabaseContext databaseContext, Customer searchResult, int take = 5)
+        {
+            searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+            searchResult.SetMostRecentTransactions(take);
         }
         #endregion
     }

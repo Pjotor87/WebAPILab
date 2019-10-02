@@ -140,6 +140,33 @@ namespace WebAPILab.Tests.Controllers
             Assert.AreEqual("invalid email", responseContent.ToLower());
         }
 
+        [TestMethod]
+        public async Task BadRequestIsReturnedForCrazyRequests()
+        {
+            // Arrange
+            AddTestdataToDatabase();
+            InquiryController controller = new InquiryController();
+
+            // Act
+            HttpResponseMessage response = controller.GetCustomerResponse(100, null);
+            string responseContent = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage response2 = controller.GetCustomerResponse(-9000, "");
+            string responseContent2 = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage response3 = controller.GetCustomerResponseByEmail(string.Empty);
+            string responseContent3 = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage response4 = controller.GetCustomerResponseById(-9000);
+            string responseContent4 = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage response5 = controller.GetCustomerResponse(int.MaxValue, string.Empty);
+            string responseContent5 = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response2.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response3.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response4.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response5.StatusCode);
+        }
+
         private void AssertTestCustomer(Customer result)
         {
             Assert.IsNotNull(result);
