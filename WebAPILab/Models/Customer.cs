@@ -22,14 +22,17 @@ namespace WebAPILab.Models
 
         public void PopulateTransactions(IList<Transaction> transactions)
         {
-            int[] transactionIds = 
-                !string.IsNullOrEmpty(this.TransactionIds) ? 
-                Array.ConvertAll(this.TransactionIds.Split(','), x => int.Parse(x)) : 
+            if (transactions != null && transactions.Count > 0)
+            {
+                int[] transactionIds =
+                !string.IsNullOrEmpty(this.TransactionIds) ?
+                Array.ConvertAll(this.TransactionIds.Split(','), x => int.Parse(x)) :
                 null;
-            this.Transactions = 
-                transactionIds != null ? 
-                transactions.Where(x => transactionIds.Contains(x.TransactionId)).ToList() : 
-                new List<Transaction>();
+                this.Transactions =
+                    transactionIds != null ?
+                    transactions.Where(x => transactionIds.Contains(x.TransactionId)).ToList() :
+                    new List<Transaction>();
+            }
         }
 
         public IList<Transaction> GetMostRecentTransactions(int take)

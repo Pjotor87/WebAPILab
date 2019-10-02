@@ -10,7 +10,9 @@ namespace WebAPILab
     {
         protected void Application_Start()
         {
+#if DEBUG
             new DatabaseInitializer(new DatabaseContext());
+#endif
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
