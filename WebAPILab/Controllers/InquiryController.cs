@@ -7,71 +7,58 @@ using System.Web.Http;
 using DAL;
 using Common.Models;
 using Common.Helpers;
+using System;
+using Common.Constants;
 
 namespace WebAPILab.Controllers
 {
     public class InquiryController : ApiController
     {
-        #region HttpResponse
         public HttpResponseMessage GetCustomerResponseById(int customerId)
         {
             if (!ValidationHelper.IsValidIntegerForId(customerId))
-                return new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Customer ID") };
-
-            HttpResponseMessage response = null;
-            IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
-            ICustomer searchResult = databaseContext.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault();
-            if (searchResult == null)
-                response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
-            else
-            {
-                PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
-                response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
-            }
-            return response;
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                { Content = new StringContent(Constants.Search.ErrorMessages.BAD_CUSTOMERID) };
+            return this.Search(new Func<ICustomer, bool>
+                (x => x.CustomerId == customerId));
         }
 
         public HttpResponseMessage GetCustomerResponseByEmail(string email)
         {
             if (!ValidationHelper.IsValidEmail(email))
-                return new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Invalid Email") };
-
-            HttpResponseMessage response = null;
-            IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
-            ICustomer searchResult = databaseContext.Customers.Where(x => x.CustomerEmail == email).FirstOrDefault();
-            if (searchResult == null)
-                response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
-            else
-            {
-                PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
-                response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
-            }
-            return response;
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                { Content = new StringContent(Constants.Search.ErrorMessages.BAD_EMAIL) };
+            return this.Search(new Func<ICustomer, bool>
+                (x => x.CustomerEmail == email));
         }
 
         public HttpResponseMessage GetCustomerResponse(int customerId, string email)
         {
             if (!ValidationHelper.IsValidIntegerForId(customerId) && !ValidationHelper.IsValidEmail(email))
-                return new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("No inquiry criteria") };
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                { Content = new StringContent(Constants.Search.ErrorMessages.NOSEARCHCRITERIA) };
+            return this.Search(new Func<ICustomer, bool>
+                (x => x.CustomerId == customerId && x.CustomerEmail == email));
+        }
 
+        private HttpResponseMessage Search(Func<ICustomer, bool> filter)
+        {
             HttpResponseMessage response = null;
             IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
-            ICustomer searchResult = databaseContext.Customers.ToList().Where(x => x.CustomerId == customerId && x.CustomerEmail == email).FirstOrDefault();
+
+            ICustomer searchResult = databaseContext.Customers.ToList().Where(filter).FirstOrDefault();
             if (searchResult == null)
-                response = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Not found") };
+                response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                { Content = new StringContent(Constants.Search.ErrorMessages.NOT_FOUND) };
             else
             {
-                PopulateSearchResultWithLatestTransactions(databaseContext, searchResult);
-                response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, "application/json") };
+                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                searchResult.SetMostRecentTransactions(5);
+                response = new HttpResponseMessage(HttpStatusCode.OK)
+                { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, Constants.Search.RESPONSE_FORMAT) };
             }
+
             return response;
         }
-
-        private static void PopulateSearchResultWithLatestTransactions(IDatabaseContext databaseContext, ICustomer searchResult, int take = 5)
-        {
-            searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
-            searchResult.SetMostRecentTransactions(take);
-        }
-        #endregion
     }
 }

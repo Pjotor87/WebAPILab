@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\Enum\SearchFor.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\Enum\Status.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
