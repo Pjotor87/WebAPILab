@@ -4,8 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using WebAPILab.DAL;
-using WebAPILab.Models;
+using DAL;
+using Common.Models;
 
 namespace WebAPILab.Controllers
 {

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 
-namespace WebAPILab.Helpers
+namespace Common.Helpers
 {
     public static class CurrencyHelper
     {

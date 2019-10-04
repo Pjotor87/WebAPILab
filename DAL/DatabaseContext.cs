@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using WebAPILab.Models;
+using Common.Models;
 
-namespace WebAPILab.DAL
+namespace DAL
 {
     public class DatabaseContext : DbContext
     {

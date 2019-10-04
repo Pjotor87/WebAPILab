@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using WebAPILab.DAL.Seed;
-using WebAPILab.Models;
+using DAL.Seed;
+using Common.Models;
 
-namespace WebAPILab.DAL
+namespace DAL
 {
     public class DatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {

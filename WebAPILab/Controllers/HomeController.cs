@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using WebAPILab.DAL;
+using DAL;
 using WebAPILab.Models;
 
 namespace WebAPILab.Controllers

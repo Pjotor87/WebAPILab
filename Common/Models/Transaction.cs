@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Common.Constants.Enum;
+using Common.Helpers;
+using System;
 using System.ComponentModel.DataAnnotations;
-using WebAPILab.Constants.Enum;
-using WebAPILab.Helpers;
 
-namespace WebAPILab.Models
+namespace Common.Models
 {
     public class Transaction
     {

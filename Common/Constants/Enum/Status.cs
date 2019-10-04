@@ -1,4 +1,4 @@
-﻿namespace WebAPILab.Constants.Enum
+﻿namespace Common.Constants.Enum
 {
     public enum TransactionStatus
     {

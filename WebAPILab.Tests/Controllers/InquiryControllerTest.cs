@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebAPILab.Controllers;
-using WebAPILab.DAL;
-using WebAPILab.Helpers;
-using WebAPILab.Models;
+using DAL;
+using Common.Helpers;
+using Common.Models;
 
 namespace WebAPILab.Tests.Controllers
 {
@@ -17,8 +17,8 @@ namespace WebAPILab.Tests.Controllers
         static DatabaseContext databaseContext = new DatabaseContext();
         static DateTime testDate = DateTime.Now;
         static Customer testCustomer = new Customer() { CustomerId = 9999, CustomerEmail = "tests@test.com", CustomerName = "Mr Customer", MobileNo = 1111122222, TransactionIds = "999,888" };
-        static Transaction testTransaction1 = new Transaction() { CurrencyCode = "SEK", TransactionDateTime = testDate, Amount = 999.50, Status = Constants.Enum.TransactionStatus.Success, TransactionId = 999 };
-        static Transaction testTransaction2 = new Transaction() { CurrencyCode = "GBP", TransactionDateTime = testDate, Amount = 48.20, Status = Constants.Enum.TransactionStatus.Success, TransactionId = 888 };
+        static Transaction testTransaction1 = new Transaction() { CurrencyCode = "SEK", TransactionDateTime = testDate, Amount = 999.50, Status = Common.Constants.Enum.TransactionStatus.Success, TransactionId = 999 };
+        static Transaction testTransaction2 = new Transaction() { CurrencyCode = "GBP", TransactionDateTime = testDate, Amount = 48.20, Status = Common.Constants.Enum.TransactionStatus.Success, TransactionId = 888 };
 
         static bool testsInitialized = false;
         [TestInitialize]

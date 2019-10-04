@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebAPILab.Models;
+using Common.Models;
 
-namespace WebAPILab.DAL.Seed
+namespace DAL.Seed
 {
     public class TransactionSeed : ISeed<Transaction>
     {
@@ -16,7 +16,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 199.90,
                     CurrencyCode = "AAA",
                     TransactionDateTime = DateTime.Now,
-                    Status = Constants.Enum.TransactionStatus.Success
+                    Status = Common.Constants.Enum.TransactionStatus.Success
                 },
                 new Transaction()
                 {
@@ -24,7 +24,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 699.90,
                     CurrencyCode = "BBB",
                     TransactionDateTime = DateTime.Now.AddDays(-30),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -32,7 +32,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 699.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(-30),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -40,7 +40,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 1.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(1),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -48,7 +48,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 1.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(2),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -56,7 +56,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 1.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(3),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -64,7 +64,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 1.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(4),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -72,7 +72,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 1.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(5),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 },
                 new Transaction()
                 {
@@ -80,7 +80,7 @@ namespace WebAPILab.DAL.Seed
                     Amount = 99999.90,
                     CurrencyCode = "SEK",
                     TransactionDateTime = DateTime.Now.AddDays(6),
-                    Status = Constants.Enum.TransactionStatus.Failed
+                    Status = Common.Constants.Enum.TransactionStatus.Failed
                 }
             };
         }

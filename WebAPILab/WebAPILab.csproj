@@ -174,27 +174,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Constants\Enum\Status.cs" />
-    <Compile Include="DAL\Seed\CustomerSeed.cs" />
-    <Compile Include="DAL\Seed\ISeed.cs" />
-    <Compile Include="DAL\Seed\TransactionSeed.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiryController.cs" />
-    <Compile Include="DAL\DatabaseContext.cs" />
-    <Compile Include="DAL\DatabaseInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CurrencyHelper.cs" />
-    <Compile Include="Helpers\JsonHelper.cs" />
-    <Compile Include="Migrations\201910012233441_Initial.cs" />
-    <Compile Include="Migrations\201910012233441_Initial.Designer.cs">
-      <DependentUpon>201910012233441_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
-    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,9 +246,18 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910012233441_Initial.resx">
-      <DependentUpon>201910012233441_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="DAL\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f2ab8986-d69e-4f20-a5fc-6542c97860a2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8916a1c4-371f-4253-b03a-794acc404071}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

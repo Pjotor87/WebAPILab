@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using WebAPILab.Models;
+using Common.Models;
 
-namespace WebAPILab.DAL.Seed
+namespace DAL.Seed
 {
     public class CustomerSeed : ISeed<Customer>
     {

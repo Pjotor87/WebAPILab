@@ -114,6 +114,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{F2AB8986-D69E-4F20-A5FC-6542C97860A2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8916A1C4-371F-4253-B03A-794ACC404071}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebAPILab\WebAPILab.csproj">
       <Project>{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}</Project>
       <Name>WebAPILab</Name>

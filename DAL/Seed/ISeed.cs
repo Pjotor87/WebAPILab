@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebAPILab.DAL.Seed
+namespace DAL.Seed
 {
     public interface ISeed<T>
     {

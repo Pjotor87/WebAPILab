@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WebAPILab.Helpers
+namespace Common.Helpers
 {
     public static class JsonHelper
     {

@@ -5,7 +5,8 @@ using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using WebAPILab.DAL;
+using Common.Models;
+using DAL;
 
 namespace WebAPILab.Models
 {
