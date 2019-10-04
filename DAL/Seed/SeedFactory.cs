@@ -2,12 +2,12 @@
 {
     public static class SeedFactory
     {
-        public static ICustomerSeed CreateCustomerSeed()
+        public static CustomerSeed CreateCustomerSeed()
         {
             return new CustomerSeed();
         }
 
-        public static ITransactionSeed CreateTransactionSeed()
+        public static TransactionSeed CreateTransactionSeed()
         {
             return new TransactionSeed();
         }

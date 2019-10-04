@@ -16,9 +16,9 @@ namespace WebAPILab.Tests.Controllers
         static HttpClient client = new HttpClient();
         static DatabaseContext databaseContext = new DatabaseContext();
         static DateTime testDate = DateTime.Now;
-        static ICustomer testCustomer1 = ModelFactory.CreateCustomer();
-        static ITransaction testTransaction1 = ModelFactory.CreateTransaction();
-        static ITransaction testTransaction2 = ModelFactory.CreateTransaction();
+        static Customer testCustomer1 = new Customer();
+        static Transaction testTransaction1 = new Transaction();
+        static Transaction testTransaction2 = new Transaction();
 
         static bool testsInitialized = false;
         [TestInitialize]

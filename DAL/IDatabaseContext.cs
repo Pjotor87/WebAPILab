@@ -5,7 +5,7 @@ namespace DAL
 {
     public interface IDatabaseContext
     {
-        DbSet<ICustomer> Customers { get; set; }
-        DbSet<ITransaction> Transactions { get; set; }
+        DbSet<Customer> Customers { get; set; }
+        DbSet<Transaction> Transactions { get; set; }
     }
 }

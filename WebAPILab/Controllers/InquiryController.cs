@@ -19,7 +19,7 @@ namespace WebAPILab.Controllers
             if (!ValidationHelper.IsValidIntegerForId(customerId))
                 return new HttpResponseMessage(HttpStatusCode.BadRequest)
                 { Content = new StringContent(Constants.Search.ErrorMessages.BAD_CUSTOMERID) };
-            return this.Search(new Func<ICustomer, bool>
+            return this.Search(new Func<Customer, bool>
                 (x => x.CustomerId == customerId));
         }
 
@@ -28,7 +28,7 @@ namespace WebAPILab.Controllers
             if (!ValidationHelper.IsValidEmail(email))
                 return new HttpResponseMessage(HttpStatusCode.BadRequest)
                 { Content = new StringContent(Constants.Search.ErrorMessages.BAD_EMAIL) };
-            return this.Search(new Func<ICustomer, bool>
+            return this.Search(new Func<Customer, bool>
                 (x => x.CustomerEmail == email));
         }
 
@@ -37,16 +37,16 @@ namespace WebAPILab.Controllers
             if (!ValidationHelper.IsValidIntegerForId(customerId) && !ValidationHelper.IsValidEmail(email))
                 return new HttpResponseMessage(HttpStatusCode.BadRequest)
                 { Content = new StringContent(Constants.Search.ErrorMessages.NOSEARCHCRITERIA) };
-            return this.Search(new Func<ICustomer, bool>
+            return this.Search(new Func<Customer, bool>
                 (x => x.CustomerId == customerId && x.CustomerEmail == email));
         }
 
-        private HttpResponseMessage Search(Func<ICustomer, bool> filter)
+        private HttpResponseMessage Search(Func<Customer, bool> filter)
         {
             HttpResponseMessage response = null;
             IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
 
-            ICustomer searchResult = databaseContext.Customers.ToList().Where(filter).FirstOrDefault();
+            Customer searchResult = databaseContext.Customers.ToList().Where(filter).FirstOrDefault();
             if (searchResult == null)
                 response = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 { Content = new StringContent(Constants.Search.ErrorMessages.NOT_FOUND) };

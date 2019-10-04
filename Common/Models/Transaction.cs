@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
-    public class Transaction : ITransaction
+    public class Transaction
     {
         public int Id { get; set; }
         public int TransactionId { get; set; }
