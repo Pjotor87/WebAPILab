@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Common.Models
 {
-    public class Customer
+    public class Customer : ICustomer
     {
         public int Id { get; set; }
         [Range(1, 9999999999)]
@@ -18,9 +18,9 @@ namespace Common.Models
         [Range(1, 9999999999)]
         public double MobileNo { get; set; }
         public string TransactionIds { get; set; }
-        public IList<Transaction> Transactions { get; set; }
+        public IList<ITransaction> Transactions { get; set; }
 
-        public void PopulateTransactions(IList<Transaction> transactions)
+        public void PopulateTransactions(IList<ITransaction> transactions)
         {
             if (transactions != null && transactions.Count > 0)
             {
@@ -31,11 +31,11 @@ namespace Common.Models
                 this.Transactions =
                     transactionIds != null ?
                     transactions.Where(x => transactionIds.Contains(x.TransactionId)).ToList() :
-                    new List<Transaction>();
+                    new List<ITransaction>();
             }
         }
 
-        public IList<Transaction> GetMostRecentTransactions(int take)
+        public IList<ITransaction> GetMostRecentTransactions(int take)
         {
             return this.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(take).ToList();
         }

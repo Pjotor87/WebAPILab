@@ -12,13 +12,13 @@ namespace WebAPILab.Models
 {
     public class HomeViewModel
     {
-        public IList<Customer> Customers { get; set; }
-        public IList<Transaction> Transactions { get; set; }
+        public IList<ICustomer> Customers { get; set; }
+        public IList<ITransaction> Transactions { get; set; }
 
-        public HomeViewModel(DatabaseContext databaseContext)
+        public HomeViewModel(IDatabaseContext databaseContext)
         {
-            DbSet<Customer> customers = databaseContext.Customers;
-            DbSet<Transaction> transactions = databaseContext.Transactions;
+            DbSet<ICustomer> customers = databaseContext.Customers;
+            DbSet<ITransaction> transactions = databaseContext.Transactions;
 
             try
             {
@@ -26,7 +26,7 @@ namespace WebAPILab.Models
             }
             catch (DataException ex)
             {
-                this.Customers = new List<Customer>();
+                this.Customers = new List<ICustomer>();
                 File.AppendAllText(ConfigurationManager.AppSettings["LogFilePath"], $"{DateTime.Now.ToString()} ERROR: {ex.ToString()}");
             }
 
@@ -36,7 +36,7 @@ namespace WebAPILab.Models
             }
             catch (DataException ex)
             {
-                this.Transactions = new List<Transaction>();
+                this.Transactions = new List<ITransaction>();
                 File.AppendAllText(ConfigurationManager.AppSettings["LogFilePath"], $"{DateTime.Now.ToString()} ERROR: {ex.ToString()}");
             }
 

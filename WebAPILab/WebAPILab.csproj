@@ -246,7 +246,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>

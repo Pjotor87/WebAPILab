@@ -3,33 +3,34 @@ using Common.Models;
 
 namespace DAL.Seed
 {
-    public class CustomerSeed : ISeed<Customer>
+    public class CustomerSeed : ICustomerSeed
     {
-        public List<Customer> GetSeed()
+        public List<ICustomer> GetSeed()
         {
-            return new List<Customer>
+            ICustomer customer1 = ModelFactory.CreateCustomer();
+            customer1.CustomerId = 123456;
+            customer1.CustomerName = "Firstname Lastname";
+            customer1.CustomerEmail = "user@domain.com";
+            customer1.MobileNo = 0123456789;
+            customer1.TransactionIds = "1295";
+            ICustomer customer2 = ModelFactory.CreateCustomer();
+            customer2.CustomerId = 12456;
+            customer2.CustomerName = "James Hetfield";
+            customer2.CustomerEmail = "user3@domain.com";
+            customer2.MobileNo = 1029384756;
+            customer2.TransactionIds = "550,500,1,2,3,4,5,6";
+            ICustomer customer3 = ModelFactory.CreateCustomer();
+            customer3.CustomerId = 198475;
+            customer3.CustomerName = "Peter Andersson";
+            customer3.CustomerEmail = "user2@domain.com";
+            customer3.MobileNo = 9876543210;
+            customer3.TransactionIds = string.Empty;
+
+            return new List<ICustomer>
             {
-                new Customer{
-                    CustomerId = 123456,
-                    CustomerName = "Firstname Lastname",
-                    CustomerEmail = "user@domain.com",
-                    MobileNo = 0123456789,
-                    TransactionIds = "1295"
-                },
-                new Customer{
-                    CustomerId = 12456,
-                    CustomerName = "James Hetfield",
-                    CustomerEmail = "user3@domain.com",
-                    MobileNo = 1029384756,
-                    TransactionIds = "550,500,1,2,3,4,5,6"
-                },
-                new Customer{
-                    CustomerId = 198475,
-                    CustomerName = "Peter Andersson",
-                    CustomerEmail = "user2@domain.com",
-                    MobileNo = 9876543210,
-                    TransactionIds = string.Empty
-                }
+                customer1,
+                customer2,
+                customer3
             };
         }
     }

@@ -20,11 +20,9 @@ namespace DAL
 
         protected override void Seed(DatabaseContext context)
         {
-            List<Customer> customerSeed = new CustomerSeed().GetSeed();
-            customerSeed.ForEach(x => context.Customers.Add(x));
+            new CustomerSeed().GetSeed().ForEach(x => context.Customers.Add(x));
             context.SaveChanges();
-            List<Transaction> transactionSeed = new TransactionSeed().GetSeed();
-            transactionSeed.ForEach(x => context.Transactions.Add(x));
+            new TransactionSeed().GetSeed().ForEach(x => context.Transactions.Add(x));
             context.SaveChanges();
         }
     }
