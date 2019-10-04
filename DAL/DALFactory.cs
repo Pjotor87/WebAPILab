@@ -1,6 +1,6 @@
 ﻿namespace DAL
 {
-    public static class Factory
+    public static class DALFactory
     {
         public static IDatabaseContext CreateDatabaseContext()
         {

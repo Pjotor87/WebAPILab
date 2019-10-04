@@ -16,9 +16,9 @@ namespace WebAPILab.Tests.Controllers
         static HttpClient client = new HttpClient();
         static DatabaseContext databaseContext = new DatabaseContext();
         static DateTime testDate = DateTime.Now;
-        static Customer testCustomer = new Customer() { CustomerId = 9999, CustomerEmail = "tests@test.com", CustomerName = "Mr Customer", MobileNo = 1111122222, TransactionIds = "999,888" };
-        static Transaction testTransaction1 = new Transaction() { CurrencyCode = "SEK", TransactionDateTime = testDate, Amount = 999.50, Status = Common.Constants.Enum.TransactionStatus.Success, TransactionId = 999 };
-        static Transaction testTransaction2 = new Transaction() { CurrencyCode = "GBP", TransactionDateTime = testDate, Amount = 48.20, Status = Common.Constants.Enum.TransactionStatus.Success, TransactionId = 888 };
+        static ICustomer testCustomer1 = ModelFactory.CreateCustomer();
+        static ITransaction testTransaction1 = ModelFactory.CreateTransaction();
+        static ITransaction testTransaction2 = ModelFactory.CreateTransaction();
 
         static bool testsInitialized = false;
         [TestInitialize]
@@ -26,8 +26,23 @@ namespace WebAPILab.Tests.Controllers
         {
             if (!testsInitialized)
             {
-                new DatabaseInitializer(databaseContext);
+                new TestDatabaseInitializer(databaseContext);
                 testsInitialized = true;
+                testCustomer1.CustomerId = 9999;
+                testCustomer1.CustomerEmail = "tests@test.com";
+                testCustomer1.CustomerName = "Mr Customer";
+                testCustomer1.MobileNo = 1111122222;
+                testCustomer1.TransactionIds = "999,888";
+                testTransaction1.CurrencyCode = "SEK";
+                testTransaction1.TransactionDateTime = testDate;
+                testTransaction1.Amount = 999.50;
+                testTransaction1.Status = Common.Constants.Enum.TransactionStatus.Success;
+                testTransaction1.TransactionId = 999;
+                testTransaction2.CurrencyCode = "GBP";
+                testTransaction2.TransactionDateTime = testDate;
+                testTransaction2.Amount = 48.20;
+                testTransaction2.Status = Common.Constants.Enum.TransactionStatus.Success;
+                testTransaction2.TransactionId = 888;
             }
         }
 
@@ -39,7 +54,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponseById(testCustomer.CustomerId);
+            HttpResponseMessage response = controller.GetCustomerResponseById(testCustomer1.CustomerId);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
@@ -54,7 +69,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponseByEmail(testCustomer.CustomerEmail);
+            HttpResponseMessage response = controller.GetCustomerResponseByEmail(testCustomer1.CustomerEmail);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
@@ -69,7 +84,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer.CustomerId, testCustomer.CustomerEmail);
+            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer1.CustomerId, testCustomer1.CustomerEmail);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
@@ -84,7 +99,7 @@ namespace WebAPILab.Tests.Controllers
             InquiryController controller = new InquiryController();
 
             // Act
-            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer.CustomerId, testCustomer.CustomerEmail);
+            HttpResponseMessage response = controller.GetCustomerResponse(testCustomer1.CustomerId, testCustomer1.CustomerEmail);
             Customer result = JsonHelper.DeserializeJson<Customer>(await response.Content.ReadAsStringAsync());
 
             // Assert
@@ -170,11 +185,11 @@ namespace WebAPILab.Tests.Controllers
         private void AssertTestCustomer(Customer result)
         {
             Assert.IsNotNull(result);
-            Assert.AreEqual(testCustomer.CustomerId, result.CustomerId);
-            Assert.AreEqual(testCustomer.CustomerEmail, result.CustomerEmail);
-            Assert.AreEqual(testCustomer.CustomerName, result.CustomerName);
-            Assert.AreEqual(testCustomer.MobileNo, result.MobileNo);
-            Assert.AreEqual(testCustomer.TransactionIds, result.TransactionIds);
+            Assert.AreEqual(testCustomer1.CustomerId, result.CustomerId);
+            Assert.AreEqual(testCustomer1.CustomerEmail, result.CustomerEmail);
+            Assert.AreEqual(testCustomer1.CustomerName, result.CustomerName);
+            Assert.AreEqual(testCustomer1.MobileNo, result.MobileNo);
+            Assert.AreEqual(testCustomer1.TransactionIds, result.TransactionIds);
         }
 
         [TestCleanup]
@@ -185,7 +200,7 @@ namespace WebAPILab.Tests.Controllers
 
         private static void AddTestdataToDatabase()
         {
-            databaseContext.Customers.Add(testCustomer);
+            databaseContext.Customers.Add(testCustomer1);
             databaseContext.SaveChanges();
             databaseContext.Transactions.Add(testTransaction1);
             databaseContext.Transactions.Add(testTransaction2);
@@ -194,7 +209,7 @@ namespace WebAPILab.Tests.Controllers
 
         private static void RemoveTestdataFromDatabase()
         {
-            databaseContext.Customers.Remove(testCustomer);
+            databaseContext.Customers.Remove(testCustomer1);
             databaseContext.SaveChanges();
             databaseContext.Transactions.Remove(testTransaction1);
             databaseContext.Transactions.Remove(testTransaction2);

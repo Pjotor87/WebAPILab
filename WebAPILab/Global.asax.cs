@@ -11,9 +11,8 @@ namespace WebAPILab
         protected void Application_Start()
         {
 #if DEBUG
-            new DatabaseInitializer(new DatabaseContext());
+            new TestDatabaseInitializer(new DatabaseContext());
 #endif
-
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

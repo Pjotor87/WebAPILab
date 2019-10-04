@@ -26,7 +26,7 @@ namespace WebAPILab.Controllers
         {
             HttpResponseMessage response = null;
 
-            IDatabaseContext databaseContext = Factory.CreateDatabaseContext();
+            IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
 
             if (customerId <= 0 && string.IsNullOrEmpty(email))
             {

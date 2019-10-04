@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using DAL.Seed;
-using Common.Models;
 
 namespace DAL
 {
-    public class DatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
+    public class TestDatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {
-        public DatabaseInitializer()
+        public TestDatabaseInitializer()
         {
         }
 
-        public DatabaseInitializer(DatabaseContext databaseContext)
+        public TestDatabaseInitializer(DatabaseContext databaseContext)
         {
 #if DEBUG
             this.InitializeDatabase(databaseContext);
