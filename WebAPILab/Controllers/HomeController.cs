@@ -2,21 +2,34 @@
 using System.Web.Mvc;
 using Common.Helpers;
 using DAL;
+using Services;
 using WebAPILab.Models;
 
 namespace WebAPILab.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller, IHomeController
     {
+        private readonly ILogger Logger;
+        private readonly IDatabaseContext DbContext;
+        private readonly IHomeViewModel ViewModel;
+
+        public HomeController(ILogger logger, IDatabaseContext dbContext, IHomeViewModel viewModel)
+        {
+            Logger = logger;
+            DbContext = dbContext;
+            ViewModel = viewModel;
+        }
+
         public ActionResult Index()
         {
-            return View(new HomeViewModel(new DatabaseContext()));
+            IHomeViewModel homeViewModel = new HomeViewModel(DbContext, Logger);
+            return View(homeViewModel);
         }
 
         [HttpGet]
         public ActionResult RedirectToSwagger()
         {
-            return Redirect("/swagger/ui/index");
+            return Redirect(Constants.Swagger.RELATIVE_URL);
         }
 
         [HttpGet]

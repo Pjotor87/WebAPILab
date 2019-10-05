@@ -1,4 +1,4 @@
-﻿namespace Common.Constants.Enum
+﻿namespace Models.Enum
 {
     public enum TransactionStatus
     {

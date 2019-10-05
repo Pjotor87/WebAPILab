@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -57,6 +60,10 @@
   <ItemGroup>
     <Compile Include="DALFactory.cs" />
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Migrations\201910042248544_Initial.cs" />
+    <Compile Include="Migrations\201910042248544_Initial.designer.cs">
+      <DependentUpon>201910042248544_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TestDatabaseInitializer.cs" />
     <Compile Include="IDatabaseContext.cs" />
@@ -74,6 +81,15 @@
       <Project>{F2AB8986-D69E-4F20-A5FC-6542C97860A2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{77EFB30F-9EFF-44B5-B96F-3101F7B6ACB3}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201910042248544_Initial.resx">
+      <DependentUpon>201910042248544_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebAPILab.Controllers;
 using DAL;
 using Common.Helpers;
-using Common.Models;
+using Models.Enum;
+using Models;
 
 namespace WebAPILab.Tests.Controllers
 {
@@ -36,12 +37,12 @@ namespace WebAPILab.Tests.Controllers
                 testTransaction1.CurrencyCode = "SEK";
                 testTransaction1.TransactionDateTime = testDate;
                 testTransaction1.Amount = 999.50;
-                testTransaction1.Status = Common.Constants.Enum.TransactionStatus.Success;
+                testTransaction1.Status = TransactionStatus.Success;
                 testTransaction1.TransactionId = 999;
                 testTransaction2.CurrencyCode = "GBP";
                 testTransaction2.TransactionDateTime = testDate;
                 testTransaction2.Amount = 48.20;
-                testTransaction2.Status = Common.Constants.Enum.TransactionStatus.Success;
+                testTransaction2.Status = TransactionStatus.Success;
                 testTransaction2.TransactionId = 888;
             }
         }

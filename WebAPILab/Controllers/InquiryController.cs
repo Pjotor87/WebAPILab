@@ -5,14 +5,13 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using DAL;
-using Common.Models;
 using Common.Helpers;
 using System;
-using Common.Constants;
+using Models;
 
 namespace WebAPILab.Controllers
 {
-    public class InquiryController : ApiController
+    public class InquiryController : ApiController, IInquiryController
     {
         public HttpResponseMessage GetCustomerResponseById(int customerId)
         {

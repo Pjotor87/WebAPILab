@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 
-namespace Common.Helpers
+namespace Models.Helpers
 {
     public static class CurrencyHelper
     {

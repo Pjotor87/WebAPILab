@@ -1,9 +1,9 @@
-﻿using Common.Constants.Enum;
-using Common.Helpers;
+﻿using Models.Enum;
+using Models.Helpers;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Common.Models
+namespace Models
 {
     public class Transaction
     {

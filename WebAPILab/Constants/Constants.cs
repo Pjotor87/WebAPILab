@@ -1,7 +1,12 @@
-﻿namespace Common.Constants
+﻿namespace WebAPILab
 {
     public sealed class Constants
     {
+        public sealed class Swagger
+        {
+            public const string RELATIVE_URL = "/swagger/ui/index";
+        }
+
         public sealed class Search
         {
             public const int DEFAULT_TRANSACTIONS_TAKE = 5;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common.Models;
+using Models;
 
 namespace DAL.Seed
 {

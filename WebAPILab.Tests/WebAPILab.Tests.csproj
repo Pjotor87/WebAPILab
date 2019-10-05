@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -122,6 +125,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{8916A1C4-371F-4253-B03A-794ACC404071}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{77EFB30F-9EFF-44B5-B96F-3101F7B6ACB3}</Project>
+      <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebAPILab\WebAPILab.csproj">
       <Project>{B3F254CE-5BEE-4B64-830B-297A51B9BAD3}</Project>

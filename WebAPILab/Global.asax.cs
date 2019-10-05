@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
 using DAL;
 
 namespace WebAPILab
@@ -10,14 +11,17 @@ namespace WebAPILab
     {
         protected void Application_Start()
         {
-#if DEBUG
-            new TestDatabaseInitializer(new DatabaseContext());
-#endif
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+#if DEBUG
+            new TestDatabaseInitializer(new DatabaseContext());
+#endif
+
+            ContainerConfig.Configure();
         }
     }
 }

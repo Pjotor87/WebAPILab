@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using Common.Models;
 using DAL;
+using Models;
+using Services;
 
 namespace WebAPILab.Models
 {
-    public class HomeViewModel
+    public class HomeViewModel : IHomeViewModel
     {
         public IList<Customer> Customers { get; set; }
         public IList<Transaction> Transactions { get; set; }
 
-        public HomeViewModel(IDatabaseContext databaseContext)
+        public HomeViewModel(IDatabaseContext databaseContext, ILogger logger)
         {
             DbSet<Customer> customers = databaseContext.Customers;
             DbSet<Transaction> transactions = databaseContext.Transactions;
+
+            logger.Log("TEST");
 
             try
             {
@@ -27,7 +27,7 @@ namespace WebAPILab.Models
             catch (DataException ex)
             {
                 this.Customers = new List<Customer>();
-                File.AppendAllText(ConfigurationManager.AppSettings["LogFilePath"], $"{DateTime.Now.ToString()} ERROR: {ex.ToString()}");
+                logger.Log(ex.ToString());
             }
 
             try
@@ -37,7 +37,7 @@ namespace WebAPILab.Models
             catch (DataException ex)
             {
                 this.Transactions = new List<Transaction>();
-                File.AppendAllText(ConfigurationManager.AppSettings["LogFilePath"], $"{DateTime.Now.ToString()} ERROR: {ex.ToString()}");
+                logger.Log(ex.ToString());
             }
 
             foreach (var customer in this.Customers)
