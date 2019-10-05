@@ -8,6 +8,7 @@ using DAL;
 using Common.Helpers;
 using Models.Enum;
 using Models;
+using DAL.Seed;
 
 namespace WebAPILab.Tests.Controllers
 {
@@ -21,12 +22,9 @@ namespace WebAPILab.Tests.Controllers
         static Transaction testTransaction1 = new Transaction();
         static Transaction testTransaction2 = new Transaction();
 
-        private readonly IDatabaseContext DbContext;
-
-        public InquiryControllerTest(IDatabaseContext dbContext)
-        {
-            DbContext = dbContext;
-        }
+        private readonly IDatabaseContext DbContext = new DatabaseContext();
+        private readonly ICustomerSeed CustomerSeed = new CustomerSeed();
+        private readonly ITransactionSeed TransactionSeed = new TransactionSeed();
 
         static bool testsInitialized = false;
         [TestInitialize]
@@ -34,7 +32,7 @@ namespace WebAPILab.Tests.Controllers
         {
             if (!testsInitialized)
             {
-                new TestDatabaseInitializer(databaseContext);
+                new TestDatabaseInitializer(CustomerSeed, TransactionSeed);
                 testsInitialized = true;
                 testCustomer1.CustomerId = 9999;
                 testCustomer1.CustomerEmail = "tests@test.com";

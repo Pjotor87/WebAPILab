@@ -4,6 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using DAL;
+using DAL.Seed;
 
 namespace WebAPILab
 {
@@ -17,11 +18,12 @@ namespace WebAPILab
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-#if DEBUG
-            new TestDatabaseInitializer(new DatabaseContext());
-#endif
-
             ContainerConfig.Configure();
+
+#if DEBUG
+            var dbInitializer = new TestDatabaseInitializer(new CustomerSeed(), new TransactionSeed());
+            dbInitializer.InitializeDatabase(new DatabaseContext());
+#endif
         }
     }
 }

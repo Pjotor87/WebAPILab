@@ -1,5 +1,5 @@
-﻿using Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using Models;
 
 namespace DAL
 {

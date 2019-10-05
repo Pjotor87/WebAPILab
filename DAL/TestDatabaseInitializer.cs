@@ -5,23 +5,21 @@ namespace DAL
 {
     public class TestDatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {
-        public TestDatabaseInitializer()
+        private readonly ICustomerSeed CustomerSeed;
+        private readonly ITransactionSeed TransactionSeed;
+
+        public TestDatabaseInitializer(ICustomerSeed customerSeed, ITransactionSeed transactionSeed)
         {
+            CustomerSeed = customerSeed;
+            TransactionSeed = transactionSeed;
         }
 
-        public TestDatabaseInitializer(DatabaseContext databaseContext)
+        protected override void Seed(DatabaseContext dbContext)
         {
-#if DEBUG
-            this.InitializeDatabase(databaseContext);
-#endif
-        }
-
-        protected override void Seed(DatabaseContext context)
-        {
-            new CustomerSeed().GetSeed().ForEach(x => context.Customers.Add(x));
-            context.SaveChanges();
-            new TransactionSeed().GetSeed().ForEach(x => context.Transactions.Add(x));
-            context.SaveChanges();
+            CustomerSeed.GetSeed().ForEach(x => dbContext.Customers.Add(x));
+            dbContext.SaveChanges();
+            TransactionSeed.GetSeed().ForEach(x => dbContext.Transactions.Add(x));
+            dbContext.SaveChanges();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DAL.Seed
 {
-    public class TransactionSeed
+    public class TransactionSeed : ITransactionSeed
     {
         public List<Transaction> GetSeed()
         {

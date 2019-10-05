@@ -3,7 +3,7 @@ using Models;
 
 namespace DAL.Seed
 {
-    public class CustomerSeed
+    public class CustomerSeed : ICustomerSeed
     {
         public List<Customer> GetSeed()
         {
