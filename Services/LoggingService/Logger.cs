@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 
-namespace Services
+namespace Services.LoggingService
 {
     public class Logger : ILogger
     {

@@ -21,6 +21,13 @@ namespace WebAPILab.Tests.Controllers
         static Transaction testTransaction1 = new Transaction();
         static Transaction testTransaction2 = new Transaction();
 
+        private readonly IDatabaseContext DbContext;
+
+        public InquiryControllerTest(IDatabaseContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
         static bool testsInitialized = false;
         [TestInitialize]
         public void InitializeTests()
@@ -52,7 +59,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponseById(testCustomer1.CustomerId);
@@ -67,7 +74,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponseByEmail(testCustomer1.CustomerEmail);
@@ -82,7 +89,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponse(testCustomer1.CustomerId, testCustomer1.CustomerEmail);
@@ -97,7 +104,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponse(testCustomer1.CustomerId, testCustomer1.CustomerEmail);
@@ -113,7 +120,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponse(500505, "anemail@thatnoone.has");
@@ -129,7 +136,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponseById(500505);
@@ -145,7 +152,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponseByEmail("anemail@thatnoone.has");
@@ -161,7 +168,7 @@ namespace WebAPILab.Tests.Controllers
         {
             // Arrange
             AddTestdataToDatabase();
-            InquiryController controller = new InquiryController();
+            InquiryController controller = new InquiryController(DbContext);
 
             // Act
             HttpResponseMessage response = controller.GetCustomerResponse(100, null);

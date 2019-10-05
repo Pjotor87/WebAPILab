@@ -13,6 +13,13 @@ namespace WebAPILab.Controllers
 {
     public class InquiryController : ApiController, IInquiryController
     {
+        private readonly IDatabaseContext DbContext;
+
+        public InquiryController(IDatabaseContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
         public HttpResponseMessage GetCustomerResponseById(int customerId)
         {
             if (!ValidationHelper.IsValidIntegerForId(customerId))
@@ -43,15 +50,14 @@ namespace WebAPILab.Controllers
         private HttpResponseMessage Search(Func<Customer, bool> filter)
         {
             HttpResponseMessage response = null;
-            IDatabaseContext databaseContext = DALFactory.CreateDatabaseContext();
 
-            Customer searchResult = databaseContext.Customers.ToList().Where(filter).FirstOrDefault();
+            Customer searchResult = DbContext.Customers.ToList().Where(filter).FirstOrDefault();
             if (searchResult == null)
                 response = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 { Content = new StringContent(Constants.Search.ErrorMessages.NOT_FOUND) };
             else
             {
-                searchResult.PopulateTransactions(databaseContext.Transactions.ToList());
+                searchResult.PopulateTransactions(DbContext.Transactions.ToList());
                 searchResult.SetMostRecentTransactions(5);
                 response = new HttpResponseMessage(HttpStatusCode.OK)
                 { Content = new StringContent(JsonConvert.SerializeObject(searchResult), Encoding.UTF8, Constants.Search.RESPONSE_FORMAT) };

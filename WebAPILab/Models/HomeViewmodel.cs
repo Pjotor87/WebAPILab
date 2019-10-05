@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using DAL;
 using Models;
-using Services;
+using Services.LoggingService;
 
 namespace WebAPILab.Models
 {

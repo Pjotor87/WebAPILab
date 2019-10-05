@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using DAL;
 using Services;
+using Services.LoggingService;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;

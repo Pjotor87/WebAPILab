@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Common.Helpers;
 using DAL;
-using Services;
+using Services.LoggingService;
 using WebAPILab.Models;
 
 namespace WebAPILab.Controllers
@@ -32,21 +32,21 @@ namespace WebAPILab.Controllers
             return Redirect(Constants.Swagger.RELATIVE_URL);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetCustomerAsync(int customerId, string email)
-        {
-            string response = string.Empty;
-            if (ValidationHelper.IsValidIntegerForId(customerId))
-            {
-                if (ValidationHelper.IsValidEmail(email))
-                    response = await new InquiryController().GetCustomerResponse(customerId, email).Content.ReadAsStringAsync();
-                else
-                    response = await new InquiryController().GetCustomerResponseById(customerId).Content.ReadAsStringAsync();
-            }
-            else if (ValidationHelper.IsValidEmail(email))
-                response = await new InquiryController().GetCustomerResponseByEmail(email).Content.ReadAsStringAsync();
+        //[HttpGet]
+        //public async Task<JsonResult> GetCustomerAsync(int customerId, string email)
+        //{
+        //    string response = string.Empty;
+        //    if (ValidationHelper.IsValidIntegerForId(customerId))
+        //    {
+        //        if (ValidationHelper.IsValidEmail(email))
+        //            response = await new InquiryController().GetCustomerResponse(customerId, email).Content.ReadAsStringAsync();
+        //        else
+        //            response = await new InquiryController().GetCustomerResponseById(customerId).Content.ReadAsStringAsync();
+        //    }
+        //    else if (ValidationHelper.IsValidEmail(email))
+        //        response = await new InquiryController().GetCustomerResponseByEmail(email).Content.ReadAsStringAsync();
             
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(response, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

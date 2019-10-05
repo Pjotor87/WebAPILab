@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Services
+namespace Services.LoggingService
 {
     public interface ILogger
     {
