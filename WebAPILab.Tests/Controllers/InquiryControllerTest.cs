@@ -22,7 +22,7 @@ namespace WebAPILab.Tests.Controllers
         static Transaction testTransaction1 = new Transaction();
         static Transaction testTransaction2 = new Transaction();
 
-        private readonly IDatabaseContext DbContext = new DatabaseContext();
+        private readonly DatabaseContext DbContext = new DatabaseContext();
         private readonly ICustomerSeed CustomerSeed = new CustomerSeed();
         private readonly ITransactionSeed TransactionSeed = new TransactionSeed();
 
@@ -32,7 +32,8 @@ namespace WebAPILab.Tests.Controllers
         {
             if (!testsInitialized)
             {
-                new TestDatabaseInitializer(CustomerSeed, TransactionSeed);
+                var dbInitializer = new TestDatabaseInitializer(CustomerSeed, TransactionSeed);
+                dbInitializer.InitializeDatabase(DbContext);
                 testsInitialized = true;
                 testCustomer1.CustomerId = 9999;
                 testCustomer1.CustomerEmail = "tests@test.com";
@@ -126,11 +127,11 @@ namespace WebAPILab.Tests.Controllers
 
             // Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.AreEqual("not found", responseContent.ToLower());
+            Assert.AreEqual(Constants.Search.ErrorMessages.NOT_FOUND, responseContent);
         }
 
         [TestMethod]
-        public async Task BadRequestIsReturnedWhenIdIsNotMatchAsync()
+        public async Task BadRequestAndNotFoundIsReturnedWhenIdIsNotMatchAsync()
         {
             // Arrange
             AddTestdataToDatabase();
@@ -142,11 +143,11 @@ namespace WebAPILab.Tests.Controllers
 
             // Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.AreEqual("invalid customer id", responseContent.ToLower());
+            Assert.AreEqual(Constants.Search.ErrorMessages.NOT_FOUND, responseContent);
         }
 
         [TestMethod]
-        public async Task BadRequestIsReturnedWhenEmailIsNotMatchAsync()
+        public async Task BadRequestAndNotFoundIsReturnedWhenEmailIsNotMatchAsync()
         {
             // Arrange
             AddTestdataToDatabase();
@@ -158,7 +159,7 @@ namespace WebAPILab.Tests.Controllers
 
             // Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.AreEqual("invalid email", responseContent.ToLower());
+            Assert.AreEqual(Constants.Search.ErrorMessages.NOT_FOUND, responseContent);
         }
 
         [TestMethod]

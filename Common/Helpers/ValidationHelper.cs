@@ -7,15 +7,20 @@ namespace Common.Helpers
     {
         public static bool IsValidEmail(string email)
         {
-            try
+            if (!string.IsNullOrEmpty(email))
             {
-                MailAddress maybeAnEmailAdress = new MailAddress(email);
+                try
+                {
+                    MailAddress maybeAnEmailAdress = new MailAddress(email);
+                }
+                catch (FormatException)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (FormatException)
-            {
+            else
                 return false;
-            }
-            return true;
         }
 
         public static bool IsValidIntegerForId(int integer)
