@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
+using DAL.Contexts;
 using DAL.Seed;
 
-namespace DAL
+namespace DAL.Initializers
 {
     public class TestDatabaseInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {

@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
-using Common.Helpers;
-using DAL;
+﻿using System.Web.Mvc;
+using DAL.Contexts;
 using Services.LoggingService;
 using WebAPILab.Models;
 

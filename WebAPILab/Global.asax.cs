@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Autofac;
-using DAL;
+using DAL.Contexts;
+using DAL.Initializers;
 using DAL.Seed;
 
 namespace WebAPILab

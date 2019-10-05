@@ -4,10 +4,10 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using DAL;
 using Common.Helpers;
 using System;
 using Models;
+using DAL.Contexts;
 
 namespace WebAPILab.Controllers
 {

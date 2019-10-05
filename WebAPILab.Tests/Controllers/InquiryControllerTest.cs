@@ -4,11 +4,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebAPILab.Controllers;
-using DAL;
 using Common.Helpers;
 using Models.Enum;
 using Models;
 using DAL.Seed;
+using DAL.Contexts;
+using DAL.Initializers;
 
 namespace WebAPILab.Tests.Controllers
 {

@@ -1,8 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using DAL;
-using Services;
+using DAL.Contexts;
 using Services.LoggingService;
 using System.Linq;
 using System.Reflection;

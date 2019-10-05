@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using DAL;
+using DAL.Contexts;
 using Models;
 using Services.LoggingService;
 
